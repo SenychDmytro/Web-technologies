@@ -16,19 +16,10 @@ function triangle(val1, type1, val2, type2) {
 
     let a, b, c, alpha, beta;
 
-    if ((type1 === "leg" && type2 === "hypotenuse") || (type2 === "leg" && type1 === "hypotenuse")) {
-        let leg, hyp;
-        if (type1 === "leg") {
-            leg = val1;
-        } else {
-            leg = val2;
-        }
 
-        if (type1 === "hypotenuse") {
-            hyp = val1;
-        } else {
-            hyp = val2;
-        }
+    if ((type1 === "leg" && type2 === "hypotenuse") || (type2 === "leg" && type1 === "hypotenuse")) {
+        let leg = (type1 === "leg") ? val1 : val2;
+        let hyp = (type1 === "hypotenuse") ? val1 : val2;
 
         if (leg <= 0 || hyp <= 0 || leg >= hyp) {
             return "Некоректні значення: катет має бути меншим за гіпотенузу.";
@@ -41,6 +32,7 @@ function triangle(val1, type1, val2, type2) {
         beta = 90 - alpha;
     }
 
+
     else if (type1 === "leg" && type2 === "leg") {
         a = val1;
         b = val2;
@@ -52,19 +44,10 @@ function triangle(val1, type1, val2, type2) {
         beta = 90 - alpha;
     }
 
-    else if ((type1 === "hypotenuse" && type2 === "angle") || (type2 === "hypotenuse" && type1 === "angle")) {
-        let hyp, ang;
-        if (type1 === "hypotenuse") {
-            hyp = val1;
-        } else {
-            hyp = val2;
-        }
 
-        if (type1 === "angle") {
-            ang = val1;
-        } else {
-            ang = val2;
-        }
+    else if ((type1 === "hypotenuse" && type2 === "angle") || (type2 === "hypotenuse" && type1 === "angle")) {
+        let hyp = (type1 === "hypotenuse") ? val1 : val2;
+        let ang = (type1 === "angle") ? val1 : val2;
 
         if (hyp <= 0 || ang <= 0 || ang >= 90) {
             return "Некоректні значення: гіпотенуза > 0, кут (0;90).";
@@ -76,19 +59,10 @@ function triangle(val1, type1, val2, type2) {
         b = c * Math.cos(degToRad(alpha));
     }
 
+ 
     else if ((type1 === "leg" && type2 === "adjacent angle") || (type2 === "leg" && type1 === "adjacent angle")) {
-        let leg, ang;
-        if (type1 === "leg") {
-            leg = val1;
-        } else {
-            leg = val2;
-        }
-
-        if (type1 === "adjacent angle") {
-            ang = val1;
-        } else {
-            ang = val2;
-        }
+        let leg = (type1 === "leg") ? val1 : val2;
+        let ang = (type1 === "adjacent angle") ? val1 : val2;
 
         if (leg <= 0 || ang <= 0 || ang >= 90) {
             return "Некоректні значення.";
@@ -96,23 +70,14 @@ function triangle(val1, type1, val2, type2) {
         b = leg;
         beta = ang;
         alpha = 90 - beta;
-        a = b * Math.tan(degToRad(alpha));
-        c = Math.sqrt(a * a + b * b);
+        a = b * Math.tan(degToRad(beta));
+        c = b / Math.cos(degToRad(beta));
     }
 
-    else if ((type1 === "leg" && type2 === "opposite angle") || (type2 === "leg" && type1 === "opposite angle")) {
-        let leg, ang;
-        if (type1 === "leg") {
-            leg = val1;
-        } else {
-            leg = val2;
-        }
 
-        if (type1 === "opposite angle") {
-            ang = val1;
-        } else {
-            ang = val2;
-        }
+    else if ((type1 === "leg" && type2 === "opposite angle") || (type2 === "leg" && type1 === "opposite angle")) {
+        let leg = (type1 === "leg") ? val1 : val2;
+        let ang = (type1 === "opposite angle") ? val1 : val2;
 
         if (leg <= 0 || ang <= 0 || ang >= 90) {
             return "Некоректні значення.";
@@ -120,13 +85,18 @@ function triangle(val1, type1, val2, type2) {
         a = leg;
         alpha = ang;
         beta = 90 - alpha;
-        b = a / Math.tan(degToRad(alpha));
-        c = Math.sqrt(a * a + b * b);
+        c = a / Math.sin(degToRad(alpha));
+        b = c * Math.cos(degToRad(alpha));
     }
 
     else {
         console.log("Несумісна пара типів. Перечитайте інструкцію.");
         return "failed";
+    }
+
+
+    if (a + b <= c || a + c <= b || b + c <= a) {
+        return "Некоректні значення: не виконується нерівність трикутника.";
     }
 
     console.log("Результати:");
