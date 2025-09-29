@@ -45,19 +45,22 @@ function triangle(val1, type1, val2, type2) {
     }
 
 
-    else if ((type1 === "hypotenuse" && type2 === "angle") || (type2 === "hypotenuse" && type1 === "angle")) {
-        let hyp = (type1 === "hypotenuse") ? val1 : val2;
-        let ang = (type1 === "angle") ? val1 : val2;
+ else if ((type1 === "hypotenuse" && type2 === "angle") || (type2 === "hypotenuse" && type1 === "angle")) {
+    let hyp = (type1 === "hypotenuse") ? val1 : val2;
+    let ang = (type1 === "angle") ? val1 : val2;
 
-        if (hyp <= 0 || ang <= 0 || ang >= 90) {
-            return "Некоректні значення: гіпотенуза > 0, кут (0;90).";
-        }
-        c = hyp;
-        alpha = ang;
-        beta = 90 - alpha;
-        a = c * Math.sin(degToRad(alpha));
-        b = c * Math.cos(degToRad(alpha));
+    const EPS = 1e-6; // захист від майже 0° чи 90°
+
+    if (hyp <= 0 || ang <= EPS || ang >= 90 - EPS) {
+        return "Некоректні значення: гіпотенуза > 0, кут у діапазоні (0;90).";
     }
+
+    c = hyp;
+    alpha = ang;
+    beta = 90 - alpha;
+    a = c * Math.sin(degToRad(alpha));
+    b = c * Math.cos(degToRad(alpha));
+}
 
  
     else if ((type1 === "leg" && type2 === "adjacent angle") || (type2 === "leg" && type1 === "adjacent angle")) {
