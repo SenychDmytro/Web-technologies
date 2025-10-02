@@ -15,9 +15,12 @@ function triangle(val1, type1, val2, type2) {
     }
 
     let a, b, c, alpha, beta;
+    const EPS = 1e-6;
 
+   
+    if ((type1 === "leg" && type2 === "hypotenuse") || 
+        (type2 === "leg" && type1 === "hypotenuse")) {
 
-    if ((type1 === "leg" && type2 === "hypotenuse") || (type2 === "leg" && type1 === "hypotenuse")) {
         let leg = (type1 === "leg") ? val1 : val2;
         let hyp = (type1 === "hypotenuse") ? val1 : val2;
 
@@ -32,7 +35,7 @@ function triangle(val1, type1, val2, type2) {
         beta = 90 - alpha;
     }
 
-
+   
     else if (type1 === "leg" && type2 === "leg") {
         a = val1;
         b = val2;
@@ -45,49 +48,56 @@ function triangle(val1, type1, val2, type2) {
     }
 
 
- else if ((type1 === "hypotenuse" && type2 === "angle") || (type2 === "hypotenuse" && type1 === "angle")) {
-    let hyp = (type1 === "hypotenuse") ? val1 : val2;
-    let ang = (type1 === "angle") ? val1 : val2;
+    else if ((type1 === "hypotenuse" && type2 === "angle") || 
+             (type2 === "hypotenuse" && type1 === "angle")) {
 
-    const EPS = 1e-6; // захист від майже 0° чи 90°
+        let hyp = (type1 === "hypotenuse") ? val1 : val2;
+        let ang = (type1 === "angle") ? val1 : val2;
 
-    if (hyp <= 0 || ang <= EPS || ang >= 90 - EPS) {
-        return "Некоректні значення: гіпотенуза > 0, кут у діапазоні (0;90).";
+        if (hyp <= 0 || ang <= EPS || ang >= 90 - EPS) {
+            return "Некоректні значення: гіпотенуза > 0, кут у діапазоні (0;90).";
+        }
+
+        c = hyp;
+        alpha = ang;
+        beta = 90 - alpha;
+        a = c * Math.sin(degToRad(alpha));
+        b = c * Math.cos(degToRad(alpha));
     }
 
-    c = hyp;
-    alpha = ang;
-    beta = 90 - alpha;
-    a = c * Math.sin(degToRad(alpha));
-    b = c * Math.cos(degToRad(alpha));
-}
+    
+    else if ((type1 === "leg" && type2 === "adjacent angle") || 
+             (type2 === "leg" && type1 === "adjacent angle")) {
 
- 
-    else if ((type1 === "leg" && type2 === "adjacent angle") || (type2 === "leg" && type1 === "adjacent angle")) {
         let leg = (type1 === "leg") ? val1 : val2;
         let ang = (type1 === "adjacent angle") ? val1 : val2;
 
-        if (leg <= 0 || ang <= 0 || ang >= 90) {
+        if (leg <= 0 || ang <= EPS || ang >= 90 - EPS) {
             return "Некоректні значення.";
         }
-        b = leg;
+
+        b = leg;       
         beta = ang;
         alpha = 90 - beta;
-        a = b * Math.tan(degToRad(beta));
+
         c = b / Math.cos(degToRad(beta));
+        a = c * Math.sin(degToRad(beta));
     }
 
+    else if ((type1 === "leg" && type2 === "opposite angle") || 
+             (type2 === "leg" && type1 === "opposite angle")) {
 
-    else if ((type1 === "leg" && type2 === "opposite angle") || (type2 === "leg" && type1 === "opposite angle")) {
         let leg = (type1 === "leg") ? val1 : val2;
         let ang = (type1 === "opposite angle") ? val1 : val2;
 
-        if (leg <= 0 || ang <= 0 || ang >= 90) {
+        if (leg <= 0 || ang <= EPS || ang >= 90 - EPS) {
             return "Некоректні значення.";
         }
-        a = leg;
+
+        a = leg;        
         alpha = ang;
         beta = 90 - alpha;
+
         c = a / Math.sin(degToRad(alpha));
         b = c * Math.cos(degToRad(alpha));
     }
@@ -97,9 +107,14 @@ function triangle(val1, type1, val2, type2) {
         return "failed";
     }
 
+    
+    if (a <= 0 || b <= 0 || c <= 0 || 
+        alpha <= 0 || beta <= 0 || alpha >= 90 || beta >= 90) {
+        return "Некоректні значення: сторони > 0 і кути в (0;90).";
+    }
 
-    if (a + b <= c || a + c <= b || b + c <= a) {
-        return "Некоректні значення: не виконується нерівність трикутника.";
+    if (Math.abs(a * a + b * b - c * c) > EPS) {
+        return "Некоректні значення: не виконується теорема Піфагора.";
     }
 
     console.log("Результати:");
