@@ -17,7 +17,7 @@ function triangle(val1, type1, val2, type2) {
     let a, b, c, alpha, beta;
     const EPS = 1e-6;
 
-   
+    // катет + гіпотенуза
     if ((type1 === "leg" && type2 === "hypotenuse") || 
         (type2 === "leg" && type1 === "hypotenuse")) {
 
@@ -35,7 +35,7 @@ function triangle(val1, type1, val2, type2) {
         beta = 90 - alpha;
     }
 
-   
+    // два катети
     else if (type1 === "leg" && type2 === "leg") {
         a = val1;
         b = val2;
@@ -47,7 +47,7 @@ function triangle(val1, type1, val2, type2) {
         beta = 90 - alpha;
     }
 
-
+    // гіпотенуза + гострий кут
     else if ((type1 === "hypotenuse" && type2 === "angle") || 
              (type2 === "hypotenuse" && type1 === "angle")) {
 
@@ -65,7 +65,7 @@ function triangle(val1, type1, val2, type2) {
         b = c * Math.cos(degToRad(alpha));
     }
 
-    
+    // катет + прилеглий кут
     else if ((type1 === "leg" && type2 === "adjacent angle") || 
              (type2 === "leg" && type1 === "adjacent angle")) {
 
@@ -84,6 +84,7 @@ function triangle(val1, type1, val2, type2) {
         a = c * Math.sin(degToRad(beta));
     }
 
+    // катет + протилежний кут
     else if ((type1 === "leg" && type2 === "opposite angle") || 
              (type2 === "leg" && type1 === "opposite angle")) {
 
@@ -107,16 +108,11 @@ function triangle(val1, type1, val2, type2) {
         return "failed";
     }
 
-    const EPS = 1e-6;
-
-if (a < EPS || b < EPS || c < EPS || alpha < EPS || beta < EPS || alpha > 90 - EPS || beta > 90 - EPS) {
-    return "Некоректні значення: сторони > 0 і кути в (0;90).";
-}
-
-if (Math.abs(a * a + b * b - c * c) > EPS) {
-    return "Некоректні значення: не виконується теорема Піфагора.";
-}
-
+    // перевірки на коректність
+    if (a < EPS || b < EPS || c < EPS || 
+        alpha < EPS || beta < EPS || alpha > 90 - EPS || beta > 90 - EPS) {
+        return "Некоректні значення: сторони > 0 і кути в (0;90).";
+    }
 
     if (Math.abs(a * a + b * b - c * c) > EPS) {
         return "Некоректні значення: не виконується теорема Піфагора.";
