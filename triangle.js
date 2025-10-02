@@ -107,11 +107,16 @@ function triangle(val1, type1, val2, type2) {
         return "failed";
     }
 
-    
-    if (a <= 0 || b <= 0 || c <= 0 || 
-        alpha <= 0 || beta <= 0 || alpha >= 90 || beta >= 90) {
-        return "Некоректні значення: сторони > 0 і кути в (0;90).";
-    }
+    const EPS = 1e-6;
+
+if (a < EPS || b < EPS || c < EPS || alpha < EPS || beta < EPS || alpha > 90 - EPS || beta > 90 - EPS) {
+    return "Некоректні значення: сторони > 0 і кути в (0;90).";
+}
+
+if (Math.abs(a * a + b * b - c * c) > EPS) {
+    return "Некоректні значення: не виконується теорема Піфагора.";
+}
+
 
     if (Math.abs(a * a + b * b - c * c) > EPS) {
         return "Некоректні значення: не виконується теорема Піфагора.";
