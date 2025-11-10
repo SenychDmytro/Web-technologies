@@ -5,26 +5,22 @@
     hard:   { time: 1000, range: 500, size: 30 }
   };
 
+  // змінні
   let score = 0;
   let timeLeft = 0;
   let timeLimit = 0;
   let targetColor = '#00c2ff';
-  let timer;
+  let timer = null;
   let range = 100;
   let squareSize = 40;
+  let timerStarted = false; 
 
-  // === DOM ===
-  const doc = window.document; 
+  const doc = window.document;
   const menu = doc.getElementById('menu');
   const game = doc.getElementById('game');
   const board = doc.getElementById('board');
   const scoreEl = doc.getElementById('score');
   const timeEl = doc.getElementById('time');
-
-  const options = doc.getElementsByTagName('option');
-  for (let i = 0; i < options.length; i++) {
-    options[i].style.padding = '2px 6px';
-  }
 
   doc.getElementById('startBtn').addEventListener('click', startGame);
 
@@ -37,10 +33,13 @@
     range = cfg.range;
     squareSize = cfg.size;
     score = 0;
+    timerStarted = false; // ще не стартував
     scoreEl.textContent = score;
+    timeEl.textContent = (timeLimit / 1000).toFixed(2);
 
     menu.style.display = 'none';
     game.style.display = 'block';
+
     nextRound();
   }
 
@@ -48,11 +47,10 @@
     clearInterval(timer);
     timeLeft = timeLimit;
     timeEl.textContent = (timeLeft / 1000).toFixed(2);
-
     board.innerHTML = '';
 
     const square = doc.createElement('div');
-    square.className = 'target'; 
+    square.className = 'target';
     square.style.width = `${squareSize}px`;
     square.style.height = `${squareSize}px`;
     square.style.background = targetColor;
@@ -69,6 +67,12 @@
 
     square.addEventListener('click', (e) => {
       e.stopPropagation();
+
+      if (!timerStarted) {
+        timerStarted = true;
+        startTimer();
+      }
+
       score++;
       scoreEl.textContent = score;
       nextRound();
@@ -76,18 +80,12 @@
 
     board.appendChild(square);
 
-    const firstDiv = doc.querySelector('#board div');
-    if (firstDiv) firstDiv.title = 'Я ціль, клікай сюди!';
-
-    const targets = doc.getElementsByClassName('target');
-    for (let t of targets) {
-      t.style.border = '1px solid #000';
-    }
-
     board.onclick = (e) => {
       if (e.target === board) endGame();
     };
+  }
 
+  function startTimer() {
     timer = setInterval(() => {
       timeLeft -= 100;
       timeEl.textContent = (timeLeft / 1000).toFixed(2);
