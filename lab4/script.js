@@ -1,11 +1,11 @@
 (() => {
+  // параметри складності
   const difficulties = {
     easy:   { time: 4000, range: 100, size: 70 },
     medium: { time: 2000, range: 300, size: 50 },
     hard:   { time: 1000, range: 500, size: 30 }
   };
 
-  // змінні
   let score = 0;
   let timeLeft = 0;
   let timeLimit = 0;
@@ -33,7 +33,7 @@
     range = cfg.range;
     squareSize = cfg.size;
     score = 0;
-    timerStarted = false; // ще не стартував
+    timerStarted = false; 
     scoreEl.textContent = score;
     timeEl.textContent = (timeLimit / 1000).toFixed(2);
 
@@ -57,6 +57,7 @@
     square.style.cursor = 'pointer';
     square.style.position = 'absolute';
 
+
     const centerX = window.innerWidth / 2 - squareSize / 2;
     const centerY = window.innerHeight / 2 - squareSize / 2 - 60;
     const offsetX = Math.floor((Math.random() - 0.5) * range);
@@ -65,6 +66,7 @@
     square.style.left = `${centerX + offsetX}px`;
     square.style.top = `${centerY + offsetY}px`;
 
+    
     square.addEventListener('click', (e) => {
       e.stopPropagation();
 
@@ -84,6 +86,7 @@
       if (e.target === board) endGame();
     };
   }
+
 
   function startTimer() {
     timer = setInterval(() => {
