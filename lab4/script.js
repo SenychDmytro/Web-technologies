@@ -1,9 +1,8 @@
 (() => {
-  // Таблиця складностей із часом, розкидом координат і розміром квадрата
   const difficulties = {
-    easy:   { time: 4000, range: 100, size: 70 }, // великий квадрат
-    medium: { time: 2000, range: 300, size: 50 }, // середній
-    hard:   { time: 1000, range: 500, size: 30 }  // маленький квадрат
+    easy:   { time: 4000, range: 100, size: 70 },
+    medium: { time: 2000, range: 300, size: 50 },
+    hard:   { time: 1000, range: 500, size: 30 }
   };
 
   let score = 0;
@@ -14,20 +13,26 @@
   let range = 100;
   let squareSize = 40;
 
-  const $ = (id) => document.getElementById(id);
-  const menu = $('menu');
-  const game = $('game');
-  const board = $('board');
-  const scoreEl = $('score');
-  const timeEl = $('time');
+  // === DOM ===
+  const doc = window.document; 
+  const menu = doc.getElementById('menu');
+  const game = doc.getElementById('game');
+  const board = doc.getElementById('board');
+  const scoreEl = doc.getElementById('score');
+  const timeEl = doc.getElementById('time');
 
-  $('startBtn').addEventListener('click', startGame);
+  const options = doc.getElementsByTagName('option');
+  for (let i = 0; i < options.length; i++) {
+    options[i].style.padding = '2px 6px';
+  }
+
+  doc.getElementById('startBtn').addEventListener('click', startGame);
 
   function startGame() {
-    const diff = $('difficulty').value;
+    const diff = doc.getElementById('difficulty').value;
     const cfg = difficulties[diff];
 
-    targetColor = $('targetColor').value;
+    targetColor = doc.getElementById('targetColor').value;
     timeLimit = cfg.time;
     range = cfg.range;
     squareSize = cfg.size;
@@ -36,7 +41,6 @@
 
     menu.style.display = 'none';
     game.style.display = 'block';
-
     nextRound();
   }
 
@@ -47,14 +51,14 @@
 
     board.innerHTML = '';
 
-    const square = document.createElement('div');
+    const square = doc.createElement('div');
+    square.className = 'target'; 
     square.style.width = `${squareSize}px`;
     square.style.height = `${squareSize}px`;
     square.style.background = targetColor;
     square.style.cursor = 'pointer';
     square.style.position = 'absolute';
 
-    // Центр екрана + випадкове зміщення
     const centerX = window.innerWidth / 2 - squareSize / 2;
     const centerY = window.innerHeight / 2 - squareSize / 2 - 60;
     const offsetX = Math.floor((Math.random() - 0.5) * range);
@@ -72,7 +76,14 @@
 
     board.appendChild(square);
 
-    // Клік по тлу завершує гру
+    const firstDiv = doc.querySelector('#board div');
+    if (firstDiv) firstDiv.title = 'Я ціль, клікай сюди!';
+
+    const targets = doc.getElementsByClassName('target');
+    for (let t of targets) {
+      t.style.border = '1px solid #000';
+    }
+
     board.onclick = (e) => {
       if (e.target === board) endGame();
     };
