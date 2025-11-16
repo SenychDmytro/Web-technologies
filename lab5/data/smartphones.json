@@ -1,0 +1,40 @@
+{
+    "category_name": "Смартфони",
+    "items": [
+        { 
+            "id": 201, 
+            "name": "Pixel 9", 
+            "shortname": "px9", 
+            "description": "Найкраща камера на ринку.", 
+            "price": "34999 ₴" 
+        },
+        { 
+            "id": 202, 
+            "name": "Galaxy S25", 
+            "shortname": "s25", 
+            "description": "Флагман від Samsung з яскравим екраном.", 
+            "price": "41000 ₴" 
+        },
+        { 
+            "id": 203, 
+            "name": "iPhone 17", 
+            "shortname": "ip17", 
+            "description": "Нова екосистема та преміум дизайн.", 
+            "price": "55000 ₴" 
+        },
+        { 
+            "id": 204, 
+            "name": "Nord 5", 
+            "shortname": "nord5", 
+            "description": "Відмінне співвідношення ціни та якості.", 
+            "price": "18000 ₴" 
+        },
+        { 
+            "id": 205, 
+            "name": "Budget King", 
+            "shortname": "b-king", 
+            "description": "Доступний смартфон для базових потреб.", 
+            "price": "6500 ₴" 
+        }
+    ]
+}

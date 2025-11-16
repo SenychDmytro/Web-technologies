@@ -1,0 +1,33 @@
+{
+    "category_name": "Аксесуари",
+    "items": [
+        { 
+            "id": 301, 
+            "name": "Бездротові навушники", 
+            "shortname": "buds-pro", 
+            "description": "Активне шумозаглушення та чистий звук.", 
+            "price": "4500 ₴" 
+        },
+        { 
+            "id": 302, 
+            "name": "Power Bank 20000", 
+            "shortname": "pb-20k", 
+            "description": "Завжди залишайтесь на зв'язку.", 
+            "price": "1800 ₴" 
+        },
+        { 
+            "id": 303, 
+            "name": "Механічна клавіатура", 
+            "shortname": "mech-key", 
+            "description": "Для швидкого друку та ігор.", 
+            "price": "2900 ₴" 
+        },
+        { 
+            "id": 304, 
+            "name": "Чохол для смартфона", 
+            "shortname": "case-std", 
+            "description": "Lorem ipsum dolor sit amet.", 
+            "price": "450 ₴" 
+        }
+    ]
+}

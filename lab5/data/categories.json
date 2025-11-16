@@ -1,0 +1,20 @@
+[
+    { 
+        "id": 1, 
+        "name": "Ноутбуки", 
+        "shortname": "laptops", 
+        "notes": "Потужні ноутбуки для роботи та розваг." 
+    },
+    { 
+        "id": 2, 
+        "name": "Смартфони", 
+        "shortname": "smartphones", 
+        "notes": "Lorem ipsum dolor sit amet, consectetur adipiscing elit." 
+    },
+    { 
+        "id": 3, 
+        "name": "Аксесуари", 
+        "shortname": "accessories", 
+        "notes": "" 
+    }
+]

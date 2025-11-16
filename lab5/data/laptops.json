@@ -1,0 +1,33 @@
+{
+    "category_name": "Ноутбуки",
+    "items": [
+        { 
+            "id": 101, 
+            "name": "Ультрабук Pro", 
+            "shortname": "ultra-pro", 
+            "description": "Тонкий, легкий та продуктивний.", 
+            "price": "45999 ₴" 
+        },
+        { 
+            "id": 102, 
+            "name": "Ігровий Легіон", 
+            "shortname": "game-legion", 
+            "description": "Для справжніх геймерів, з потужною відеокартою.", 
+            "price": "68000 ₴" 
+        },
+        { 
+            "id": 103, 
+            "name": "Офісний Стандарт", 
+            "shortname": "office-std", 
+            "description": "Надійний помічник для щоденних завдань.", 
+            "price": "21500 ₴" 
+        },
+        { 
+            "id": 104, 
+            "name": "MacBook Air", 
+            "shortname": "mac-air", 
+            "description": "Lorem ipsum dolor sit amet.", 
+            "price": "52000 ₴" 
+        }
+    ]
+}

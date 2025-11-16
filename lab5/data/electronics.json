@@ -1,0 +1,9 @@
+{
+  "categoryName": "Електроніка",
+  "items": [
+    { "id": 1, "name": "Смартфон X10", "shortname": "smartphone", "description": "Потужний процесор, яскравий дисплей.", "price": "12000 грн" },
+    { "id": 2, "name": "Навушники AirTune", "shortname": "earphones", "description": "Bluetooth, шумозаглушення.", "price": "3500 грн" },
+    { "id": 3, "name": "Планшет SkyTab", "shortname": "tablet", "description": "10.5” екран, 64 ГБ пам’яті.", "price": "8500 грн" },
+    { "id": 4, "name": "Ноутбук UltraPro", "shortname": "laptop", "description": "Core i7, 16 ГБ ОЗП, SSD 512 ГБ.", "price": "28000 грн" }
+  ]
+}
